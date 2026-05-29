@@ -1,6 +1,7 @@
 import os
 from backend.app import app, db, Order, Payment, Customer, User
 
+
 def cleanup():
     with app.app_context():
         print("Cleaning up database...")

@@ -30,10 +30,19 @@ async function init() {
     return;
   }
 
-  const hasPriorOrder = !!localStorage.getItem('mm_order_id');
-  const fnRaw   = localStorage.getItem('menumatrix_function');
+const fnRaw   = localStorage.getItem('menumatrix_function');
   const detRaw  = localStorage.getItem('menumatrix_details');
   const menuRaw = localStorage.getItem('menumatrix_menu');
+
+  // If fresh booking data exists, always clear any stale prior order
+  // so we don't reuse an old approved order for a new booking
+  if (fnRaw && detRaw && menuRaw) {
+    localStorage.removeItem('mm_order_id');
+    localStorage.removeItem('mm_order_code');
+    localStorage.removeItem('mm_submission_id');
+  }
+
+  const hasPriorOrder = !!localStorage.getItem('mm_order_id');
 
   // Redirect only when no prior order AND booking data missing
   if (!hasPriorOrder) {
@@ -111,6 +120,7 @@ async function fetchOrderAndRender() {
       r.addEventListener('change', updatePayButton)
     );
     updatePayButton();
+   
     showStatus(data.status);
     if (data.status === 'pending') startPolling();
   } catch (err) {
@@ -311,7 +321,7 @@ function showStatus(status) {
   const title = document.getElementById('statusTitle');
   if (!card || !icon || !title) return;
 
-  card.className = 'pay-card pay-status-card reveal stagger-3';
+  card.className = 'pay-card pay-status-card reveal visible stagger-3';
   icon.className = 'pay-card-icon status-icon';
 
   if (status === 'pending') {
@@ -324,6 +334,7 @@ function showStatus(status) {
     title.textContent = 'Approved — Complete Payment';
     card.classList.add('approved-card');
     updatePayButton();
+    initPaymentForms();
 
   } else if (status === 'rejected') {
     show('stateRejected');
