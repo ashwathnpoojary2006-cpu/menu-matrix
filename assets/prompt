@@ -1,0 +1,20 @@
+1.and one one more thing i want auto aprioval if the day is more 
+  than one order like minum people 3000 at day, night 3000 ,if it 
+  exeed from that that must be declined ,first you have to notice 
+  while choosing the date time ,like make our own calender to choose 
+  the date if the day has full 3000  you have to note that date like red 
+  clorour if litle orange if thare is more space make green 
+
+2.i want the login page at the entry ,if they dont want to login its ok 
+  the can check the menues but dont have the access to order anything .
+
+3. see here is the problem the booking is not shown in the admin pannel ,
+  if the no of gueast below 3000 in a day the oder automatically approved there is no 
+need for admin to approve if the order if above the admin cionformation must be required 
+4.Now i want you to add payment details form in the payment page aftre entering the payment details 
+  the payment completed and the msg is send to admin pannel in the admin panel it has to show 
+  comfirmed ,50%payment or full done,and messsge box wher the direct message is sent to the customer from 
+  admin.and admin email=ashwathnpoojary2006u@gmail.com password=[nigga123]set this as admin 
+5.the custom menu is not working , there is the logic=if fully guest 3000 is booked then the user can make booking on that day but admin 
+has to approve for that booking that approve and reject buttons are not working,and after login the account 
+should be shown at the top  in the index file itself if they did not loging only browsing no changes 

@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MenuMatrix — Premium catering service for weddings, birthdays, corporate events, festivals and house parties. Craft your perfect menu with our intelligent booking platform.">
+  <title>MenuMatrix — Premium Catering Service</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=20260523">
+  <link rel="stylesheet" href="css/responsive.css?v=20260523">
+</head>
+<body>
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo">
+        <img class="logo-img" src="assets/logo.png" alt="MenuMatrix">
+        <span class="logo-text">Menu<span class="logo-accent">Matrix</span></span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#gallery" class="nav-link">Gallery</a>
+        <a href="#testimonials" class="nav-link">Testimonials</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+      <!-- User area: filled by JS -->
+      <div id="navUserArea" style="display:flex;align-items:center;gap:10px;"></div>
+      <button class="nav-toggle" id="navToggle" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <div class="hero-bg-shape shape-1"></div>
+      <div class="hero-bg-shape shape-2"></div>
+      <div class="hero-bg-shape shape-3"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-text">
+        <span class="hero-tag">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Premium Catering Experience
+        </span>
+        <h1 class="hero-title">Craft Your <span class="gradient-text">Perfect Menu</span> For Every Occasion</h1>
+        <p class="hero-subtitle">From royal weddings to casual house parties — curate exquisite dishes for every celebration with our intelligent menu planner and seamless booking system.</p>
+        <div class="hero-actions">
+          <a href="function.html" class="btn-primary">
+            <span>Plan Your Event</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#about" class="btn-secondary">
+            <span>Learn More</span>
+          </a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=600&h=500&fit=crop" alt="Indian thali spread">
+        </div>
+        <div class="hero-float-card card-1">
+          <div class="card-icon purple">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div>
+            <div class="card-label">Events Served</div>
+            <div class="card-value">2,400+</div>
+          </div>
+        </div>
+        <div class="hero-float-card card-2">
+          <div class="card-icon yellow">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <div>
+            <div class="card-label">Customer Rating</div>
+            <div class="card-value">4.9 / 5</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-indicator">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT SECTION ===== -->
+  <section class="section about-section" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image reveal-left">
+          <img src="https://images.unsplash.com/photo-1596797038530-2c107229654b?w=600&h=500&fit=crop" alt="Indian catering kitchen">
+          <div class="about-image-accent"></div>
+        </div>
+        <div class="about-content reveal-right">
+          <p class="section-tag">About Us</p>
+          <h2 class="section-title">The Art of Premium Catering</h2>
+          <p class="about-text">MenuMatrix has been crafting unforgettable culinary experiences for over a decade. We blend traditional flavors with modern presentation to deliver menus that leave a lasting impression on your guests.</p>
+          <p class="about-text">Our team of expert chefs and event coordinators work together to ensure every dish is prepared with the finest ingredients and served with impeccable timing.</p>
+          <div class="about-stats">
+            <div class="stat-item reveal stagger-1">
+              <div class="stat-number" data-count="12" data-suffix="+">0</div>
+              <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="stat-item reveal stagger-2">
+              <div class="stat-number" data-count="2400" data-suffix="+">0</div>
+              <div class="stat-label">Events Catered</div>
+            </div>
+            <div class="stat-item reveal stagger-3">
+              <div class="stat-number" data-count="150" data-suffix="+">0</div>
+              <div class="stat-label">Menu Items</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SERVICES SECTION ===== -->
+  <section class="section services-section" id="services">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-tag">Our Services</p>
+        <h2 class="section-title">Events We Cater</h2>
+        <p class="section-desc">From intimate gatherings to grand celebrations, we bring culinary excellence to every occasion.</p>
+      </div>
+      <div class="services-carousel-wrapper reveal">
+        <div class="carousel-hover-zone carousel-zone-left"></div>
+        <div class="services-carousel" id="servicesCarousel">
+          <div class="svc-slide">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=420&h=520&fit=crop" alt="Wedding catering">
+            <div class="svc-slide-overlay">
+              <div class="svc-slide-title">Weddings</div>
+              <div class="svc-slide-desc">Grand and elegant menus fit for the most special day of your life.</div>
+            </div>
+          </div>
+          <div class="svc-slide">
+            <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=420&h=520&fit=crop" alt="Engagement ceremony">
+            <div class="svc-slide-overlay">
+              <div class="svc-slide-title">Engagement</div>
+              <div class="svc-slide-desc">Celebrate the beginning of a new journey with a curated feast.</div>
+            </div>
+          </div>
+          <div class="svc-slide">
+            <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=420&h=520&fit=crop" alt="Birthday catering">
+            <div class="svc-slide-overlay">
+              <div class="svc-slide-title">Birthdays</div>
+              <div class="svc-slide-desc">Fun and vibrant food spreads for celebrations of every age group.</div>
+            </div>
+          </div>
+          <div class="svc-slide">
+            <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=420&h=520&fit=crop" alt="Corporate events">
+            <div class="svc-slide-overlay">
+              <div class="svc-slide-title">Corporate</div>
+              <div class="svc-slide-desc">Professional dining that impresses clients, partners, and employees.</div>
+            </div>
+          </div>
+          <div class="svc-slide">
+            <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=420&h=520&fit=crop" alt="Festival catering">
+            <div class="svc-slide-overlay">
+              <div class="svc-slide-title">Festivals</div>
+              <div class="svc-slide-desc">Traditional festive flavors for Diwali, Pongal, Eid, Navratri and more.</div>
+            </div>
+          </div>
+          <div class="svc-slide">
+            <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=420&h=520&fit=crop" alt="House party catering">
+            <div class="svc-slide-overlay">
+              <div class="svc-slide-title">House Parties</div>
+              <div class="svc-slide-desc">Casual yet delicious menus perfect for intimate home gatherings.</div>
+            </div>
+          </div>
+          <div class="svc-slide">
+            <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=420&h=520&fit=crop" alt="Housewarming ceremony">
+            <div class="svc-slide-overlay">
+              <div class="svc-slide-title">Housewarming</div>
+              <div class="svc-slide-desc">Griha Pravesh menus with traditional sweets and festive specialties.</div>
+            </div>
+          </div>
+          <div class="svc-slide">
+            <img src="https://images.unsplash.com/photo-1544126592-807ade215a0b?w=420&h=520&fit=crop" alt="Baby shower">
+            <div class="svc-slide-overlay">
+              <div class="svc-slide-title">Baby Shower</div>
+              <div class="svc-slide-desc">Joyful menus for naming ceremonies, seemantham, and baby showers.</div>
+            </div>
+          </div>
+          <div class="svc-slide">
+            <img src="https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?w=420&h=520&fit=crop" alt="Anniversary celebration">
+            <div class="svc-slide-overlay">
+              <div class="svc-slide-title">Anniversary</div>
+              <div class="svc-slide-desc">Romantic and elegant menus to mark your years of togetherness.</div>
+            </div>
+          </div>
+          <div class="svc-slide">
+            <img src="https://images.unsplash.com/photo-1567591370504-80c7e890e269?w=420&h=520&fit=crop" alt="Religious functions">
+            <div class="svc-slide-overlay">
+              <div class="svc-slide-title">Religious Functions</div>
+              <div class="svc-slide-desc">Pure vegetarian menus for pooja, havan, satyanarayan, and temple events.</div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-hover-zone carousel-zone-right"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GALLERY SECTION ===== -->
+  <section class="section gallery-section" id="gallery">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-tag">Our Work</p>
+        <h2 class="section-title">Photo Gallery</h2>
+        <p class="section-desc">A glimpse into the culinary masterpieces we create for our clients.</p>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item reveal-scale stagger-1">
+          <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800&h=600&fit=crop" alt="Indian thali spread">
+          <div class="gallery-overlay"><span>Grand Indian Thali</span></div>
+        </div>
+        <div class="gallery-item reveal-scale stagger-2">
+          <img src="https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=400&h=300&fit=crop" alt="Chicken Biryani">
+          <div class="gallery-overlay"><span>Hyderabadi Biryani</span></div>
+        </div>
+        <div class="gallery-item reveal-scale stagger-3">
+          <img src="https://images.unsplash.com/photo-1666190100556-c9a249ddf8e2?w=400&h=300&fit=crop" alt="Gulab Jamun">
+          <div class="gallery-overlay"><span>Traditional Sweets</span></div>
+        </div>
+        <div class="gallery-item reveal-scale stagger-4">
+          <img src="https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&h=300&fit=crop" alt="Paneer Butter Masala">
+          <div class="gallery-overlay"><span>North Indian Curries</span></div>
+        </div>
+        <div class="gallery-item reveal-scale stagger-5">
+          <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&h=300&fit=crop" alt="Samosa and snacks">
+          <div class="gallery-overlay"><span>Crispy Snacks</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIALS SECTION ===== -->
+  <section class="section testimonials-section" id="testimonials">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-tag">What Our Clients Say</p>
+        <h2 class="section-title">Testimonials</h2>
+        <p class="section-desc">Hear from the happy hosts who trusted us with their special occasions.</p>
+      </div>
+      <div class="testimonials-wrapper reveal">
+        <div class="testimonials-track" id="testimonialTrack">
+          <!-- Card 1 -->
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <p class="testimonial-text">"MenuMatrix made our wedding reception absolutely magical. The food was extraordinary and every guest complimented the presentation. Truly a five-star experience!"</p>
+            <div class="testimonial-author">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop" alt="Priya Sharma">
+              <div>
+                <div class="testimonial-author-name">Priya Sharma</div>
+                <div class="testimonial-author-role">Wedding Reception, Chennai</div>
+              </div>
+            </div>
+          </div>
+          <!-- Card 2 -->
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <p class="testimonial-text">"We hosted our annual corporate gala with MenuMatrix and the experience was flawless. From setup to cleanup, their team handled everything professionally."</p>
+            <div class="testimonial-author">
+              <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop" alt="Rajesh Kumar">
+              <div>
+                <div class="testimonial-author-name">Rajesh Kumar</div>
+                <div class="testimonial-author-role">Corporate Gala, Bangalore</div>
+              </div>
+            </div>
+          </div>
+          <!-- Card 3 -->
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <p class="testimonial-text">"The birthday party feast was beyond our expectations! The kids loved the food and the custom menu option let us pick exactly what we wanted. Highly recommended."</p>
+            <div class="testimonial-author">
+              <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop" alt="Anitha Menon">
+              <div>
+                <div class="testimonial-author-name">Anitha Menon</div>
+                <div class="testimonial-author-role">Birthday Party, Hyderabad</div>
+              </div>
+            </div>
+          </div>
+          <!-- Card 4 -->
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <p class="testimonial-text">"Our Diwali celebration was a grand success thanks to MenuMatrix. The traditional festival menu was authentic, fresh, and absolutely delicious. Will definitely book again!"</p>
+            <div class="testimonial-author">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" alt="Vikram Patel">
+              <div>
+                <div class="testimonial-author-name">Vikram Patel</div>
+                <div class="testimonial-author-role">Festival Celebration, Mumbai</div>
+              </div>
+            </div>
+          </div>
+          <!-- Card 5 -->
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <p class="testimonial-text">"Hosted a house party for 50 people and MenuMatrix made it stress-free. The online booking was so easy and the food was restaurant-quality. Amazing service!"</p>
+            <div class="testimonial-author">
+              <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop" alt="Sneha Reddy">
+              <div>
+                <div class="testimonial-author-name">Sneha Reddy</div>
+                <div class="testimonial-author-role">House Party, Pune</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-controls reveal">
+        <button class="testimonial-btn" id="testimonialPrev">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </button>
+        <div class="testimonial-dots" id="testimonialDots"></div>
+        <button class="testimonial-btn" id="testimonialNext">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT SECTION ===== -->
+  <section class="section contact-section" id="contact">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-tag">Get In Touch</p>
+        <h2 class="section-title">Contact Us</h2>
+        <p class="section-desc">Have questions or ready to plan your event? We'd love to hear from you.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info reveal-left">
+          <div class="contact-info-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div>
+              <div class="contact-info-label">Phone</div>
+              <div class="contact-info-value">+91 98765 43210</div>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <div class="contact-info-label">Email</div>
+              <div class="contact-info-value">hello@menumatrix.com</div>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <div class="contact-info-label">Address</div>
+              <div class="contact-info-value">123 Catering Lane, Food District, Chennai - 600001</div>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <div class="contact-info-label">Working Hours</div>
+              <div class="contact-info-value">Mon - Sat, 9:00 AM - 8:00 PM</div>
+            </div>
+          </div>
+        </div>
+        <form class="contact-form reveal-right" id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="contactName">Your Name</label>
+              <input type="text" id="contactName" placeholder="John Doe" required>
+            </div>
+            <div class="form-group">
+              <label for="contactPhone">Phone Number</label>
+              <input type="tel" id="contactPhone" placeholder="+91 98765 43210" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="contactEmail">Email Address</label>
+            <input type="email" id="contactEmail" placeholder="john@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="contactMessage">Your Message</label>
+            <textarea id="contactMessage" placeholder="Tell us about your event..." required></textarea>
+          </div>
+          <button type="submit" class="btn-submit">
+            Send Message
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="nav-logo">
+            <span class="logo-icon">M</span>
+            <span class="logo-text">Menu<span class="logo-accent">Matrix</span></span>
+          </a>
+          <p class="footer-brand-desc">Premium catering service for weddings, birthdays, corporate events, festivals and house parties. Crafting unforgettable culinary experiences since 2014.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook">
+              <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="#" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="#" aria-label="Twitter">
+              <svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Events</h4>
+          <ul class="footer-links">
+            <li><a href="function.html">Weddings</a></li>
+            <li><a href="function.html">Birthdays</a></li>
+            <li><a href="function.html">Corporate</a></li>
+            <li><a href="function.html">Festivals</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Support</h4>
+          <ul class="footer-links">
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Refund Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 MenuMatrix. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Terms</a>
+          <a href="#">Privacy</a>
+          <a href="#">Cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== LIGHTBOX ===== -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <img id="lightboxImg" src="" alt="">
+  </div>
+
+  <!-- ===== TOAST ===== -->
+  <div class="toast" id="toast">
+    <span id="toastMsg">Message sent!</span>
+  </div>
+
+  <script src="js/common.js?v=20260523"></script>
+  <script src="js/auth.js?v=20260523"></script>
+  <script src="js/landing.js?v=20260523"></script>
+  <script>
+    // Navbar auth is automatically handled by auth.js on DOMContentLoaded.
+    if (typeof updateNavbarAuth === 'function') {
+      updateNavbarAuth();
+    }
+  </script>
+</body>
+</html>

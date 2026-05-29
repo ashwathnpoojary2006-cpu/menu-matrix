@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MenuMatrix — Admin Dashboard">
+  <title>Admin Dashboard — MenuMatrix</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=20260526">
+  <link rel="stylesheet" href="css/responsive.css?v=20260526">
+  <style>
+    .admin-body {
+      background: var(--bg-secondary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .admin-navbar {
+      background: rgba(26, 16, 40, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 15px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .admin-container {
+      flex: 1;
+      padding: 40px 5%;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 30px;
+    }
+    .admin-title {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      color: var(--text-primary);
+      margin: 0 0 10px 0;
+    }
+    .admin-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .admin-stat-card {
+      background: var(--bg-tertiary);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .admin-stat-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--yellow);
+    }
+    .admin-stat-label {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .admin-table-container {
+      background: var(--bg-tertiary);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      overflow-x: auto;
+    }
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    .admin-table th, .admin-table td {
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .admin-table th {
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .admin-table tbody tr:hover {
+      background: rgba(255, 255, 255, 0.01);
+    }
+    .badge {
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: inline-block;
+    }
+    .badge.pending { background: rgba(234, 179, 8, 0.2); color: #fbbf24; }
+    .badge.approved { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+    .badge.confirmed { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+    .badge.rejected { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+
+    /* Payment status badges */
+    .pay-badge {
+      padding: 4px 10px;
+      border-radius: 16px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .pay-badge.unpaid { background: rgba(156, 163, 175, 0.15); color: #9ca3af; }
+    .pay-badge.half { background: rgba(245, 158, 11, 0.18); color: #f59e0b; }
+    .pay-badge.full { background: rgba(16, 185, 129, 0.18); color: #10b981; }
+    .pay-badge-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+    
+    .action-btns {
+      display: flex;
+      gap: 8px;
+    }
+    .btn-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      cursor: pointer;
+      color: white;
+      transition: all 0.2s;
+    }
+    .btn-approve { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+    .btn-approve:hover { background: #10b981; color: white; }
+    .btn-reject { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+    .btn-reject:hover { background: #ef4444; color: white; }
+    .btn-download { background: rgba(255, 255, 255, 0.1); color: white; }
+    .btn-download:hover { background: rgba(255, 255, 255, 0.2); }
+
+    /* Message Modal */
+    .msg-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(6px);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    .msg-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+    .msg-modal {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      width: 90%;
+      max-width: 520px;
+      max-height: 85vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
+      transform: translateY(20px) scale(0.96);
+      transition: all 0.3s ease;
+    }
+    .msg-overlay.open .msg-modal {
+      transform: translateY(0) scale(1);
+    }
+    .msg-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(124, 58, 237, 0.04), transparent);
+    }
+    .msg-modal-header h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .msg-modal-header h3 span.msg-order-code {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--purple);
+      background: rgba(124, 58, 237, 0.08);
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .msg-close-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+    .msg-close-btn:hover {
+      background: rgba(239, 68, 68, 0.1);
+      color: #ef4444;
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+    .msg-customer-info {
+      padding: 14px 24px;
+      background: var(--bg-secondary);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .msg-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--gradient-purple);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .msg-customer-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+    }
+    .msg-customer-email {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .msg-history {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 120px;
+      max-height: 300px;
+    }
+    .msg-empty {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      padding: 30px 0;
+    }
+    .msg-bubble {
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      max-width: 85%;
+      position: relative;
+    }
+    .msg-bubble.admin {
+      background: var(--gradient-purple);
+      color: white;
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+    .msg-bubble.customer {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+    }
+    .msg-bubble-time {
+      font-size: 0.65rem;
+      opacity: 0.6;
+      margin-top: 4px;
+      display: block;
+    }
+    .msg-compose {
+      padding: 16px 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 10px;
+      align-items: flex-end;
+    }
+    .msg-textarea {
+      flex: 1;
+      padding: 12px 16px;
+      background: var(--bg-secondary);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-md);
+      font-family: var(--font-main);
+      font-size: 0.88rem;
+      color: var(--text-primary);
+      resize: none;
+      outline: none;
+      min-height: 44px;
+      max-height: 100px;
+      transition: border-color 0.2s;
+    }
+    .msg-textarea:focus {
+      border-color: var(--purple);
+    }
+    .msg-textarea::placeholder {
+      color: var(--text-muted);
+    }
+    .msg-send-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--gradient-purple);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+    .msg-send-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px var(--purple-glow);
+    }
+    .msg-send-btn:disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="admin-body">
+
+  <nav class="admin-navbar">
+    <a href="index.html" class="nav-logo">
+      <img class="logo-img" src="assets/logo.png" alt="MenuMatrix">
+      <span class="logo-text">Menu<span class="logo-accent">Matrix</span> <span style="font-size:12px; color:var(--text-muted); font-weight:normal;">Admin</span></span>
+    </a>
+    <div style="display: flex; gap: 15px; align-items: center;">
+      <a href="index.html" class="nav-link">View Site</a>
+      <button class="btn-secondary" style="padding: 8px 16px; font-size: 0.9rem;" onclick="logout()">Sign Out</button>
+    </div>
+  </nav>
+
+  <div class="admin-container">
+    <div class="admin-header">
+      <div>
+        <h1 class="admin-title">Admin Dashboard</h1>
+        <p style="color: var(--text-muted);">Manage your catering orders, payments, and send messages to customers.</p>
+      </div>
+      <div>
+        <button class="btn-primary" onclick="window.location.href='http://127.0.0.1:5000/api/orders/excel'">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Export All to Excel
+        </button>
+      </div>
+    </div>
+
+    <div class="admin-stats">
+      <div class="admin-stat-card">
+        <div class="admin-stat-label">Total Orders</div>
+        <div class="admin-stat-value" id="statTotal">0</div>
+      </div>
+      <div class="admin-stat-card">
+        <div class="admin-stat-label">Pending Approval</div>
+        <div class="admin-stat-value" style="color: #fbbf24;" id="statPending">0</div>
+      </div>
+      <div class="admin-stat-card">
+        <div class="admin-stat-label">Confirmed Bookings</div>
+        <div class="admin-stat-value" style="color: #34d399;" id="statConfirmed">0</div>
+      </div>
+      <div class="admin-stat-card">
+        <div class="admin-stat-label">Revenue (Confirmed)</div>
+        <div class="admin-stat-value" style="color: #60a5fa;" id="statRevenue">₹0</div>
+      </div>
+    </div>
+
+    <!-- Calendar View -->
+    <div class="admin-stat-card" style="margin-bottom: 25px; padding: 25px; width: 100%;">
+      <h3 style="margin-bottom: 15px; font-size: 1.1rem; color: var(--text-primary);">Booking Capacity Calendar</h3>
+      <div class="custom-calendar-wrap" style="max-width: 500px; margin: 0 auto; background: var(--bg-secondary);">
+        <div class="calendar-header">
+          <button type="button" class="cal-nav" onclick="changeAdminMonth(-1)">&#10094;</button>
+          <div id="adminCalMonthYear" style="font-weight: 600;"></div>
+          <button type="button" class="cal-nav" onclick="changeAdminMonth(1)">&#10095;</button>
+        </div>
+        <div class="calendar-weekdays">
+          <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+        </div>
+        <div id="adminCalendarDays" class="calendar-days"></div>
+        <div class="calendar-legend">
+          <div class="legend-item"><span class="legend-color green"></span> Available</div>
+          <div class="legend-item"><span class="legend-color orange"></span> Filling Fast</div>
+          <div class="legend-item"><span class="legend-color red"></span> Fully Booked (3000+)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-table-container">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Customer</th>
+            <th>Event Date</th>
+            <th>Guests</th>
+            <th>Total Amount</th>
+            <th>Status</th>
+            <th>Payment</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="ordersTableBody">
+          <!-- Populated by JS -->
+          <tr><td colspan="8" style="text-align:center;">Loading orders...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Message Modal -->
+  <div class="msg-overlay" id="msgOverlay" onclick="if(event.target===this)closeMsgModal()">
+    <div class="msg-modal">
+      <div class="msg-modal-header">
+        <h3>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Message Customer
+          <span class="msg-order-code" id="msgOrderCode">MM-000000</span>
+        </h3>
+        <button class="msg-close-btn" onclick="closeMsgModal()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="msg-customer-info" id="msgCustomerInfo">
+        <div class="msg-avatar" id="msgAvatar">G</div>
+        <div>
+          <div class="msg-customer-name" id="msgCustomerName">Guest</div>
+          <div class="msg-customer-email" id="msgCustomerEmail">guest@email.com</div>
+        </div>
+      </div>
+      <div class="msg-history" id="msgHistory">
+        <div class="msg-empty">No messages yet. Start the conversation!</div>
+      </div>
+      <div class="msg-compose">
+        <textarea class="msg-textarea" id="msgTextarea" placeholder="Type your message…" rows="1"></textarea>
+        <button class="msg-send-btn" id="msgSendBtn" onclick="sendMessage()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"><span id="toastMsg">Action successful</span></div>
+
+  <script src="js/auth.js?v=20260526"></script>
+  <script src="js/admin.js?v=20260526"></script>
+</body>
+</html>

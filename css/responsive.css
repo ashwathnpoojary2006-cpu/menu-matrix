@@ -1,0 +1,1038 @@
+/* ============================================
+   MenuMatrix — Responsive Overrides
+   Mobile  : ≤ 480px
+   Tablet  : 481px – 768px
+   Laptop  : 769px – 1024px
+   Desktop : 1025px+
+   ============================================ */
+
+/* ============================================
+   GLOBAL UTILITIES
+   ============================================ */
+
+/* Ensure nothing overflows horizontally on any device */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Fluid container */
+.container {
+  width: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+/* ============================================
+   NAVBAR — MOBILE MENU
+   ============================================ */
+
+/* The mobile-open state was toggled via JS but had no CSS — fix it */
+.nav-links.mobile-open {
+  display: flex !important;
+  flex-direction: column;
+  position: fixed;
+  top: 72px;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 20px 24px 28px;
+  gap: 4px;
+  z-index: 998;
+  box-shadow: 0 12px 40px rgba(124, 58, 237, 0.10);
+  animation: slideDown 0.25s ease-out;
+}
+
+.nav-links.mobile-open .nav-link {
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
+}
+
+.nav-links.mobile-open .nav-link:last-child {
+  border-bottom: none;
+}
+
+/* Show "Book Now" CTA inside mobile menu instead of hiding it */
+@media (max-width: 768px) {
+  .nav-links.mobile-open::after {
+    content: '';
+    display: block;
+    margin-top: 16px;
+  }
+
+  /* Animated hamburger → X */
+  .nav-toggle.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-toggle.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Show CTA in mobile open menu */
+  .nav-links.mobile-open + .nav-cta-mobile {
+    display: block;
+  }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+
+@media (max-width: 1024px) {
+  .hero-content {
+    gap: 40px;
+    padding: 120px 24px 60px;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: auto;
+    padding-bottom: 60px;
+  }
+
+  .hero-content {
+    padding: 110px 20px 60px;
+    gap: 32px;
+  }
+
+  .hero-title {
+    font-size: clamp(1.9rem, 7vw, 2.6rem);
+    line-height: 1.2;
+  }
+
+  .hero-subtitle {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .hero-actions .btn-primary,
+  .hero-actions .btn-secondary {
+    width: 100%;
+    max-width: 320px;
+    justify-content: center;
+  }
+
+  .hero-image-wrapper img {
+    border-radius: 16px;
+  }
+
+  .hero-scroll-indicator {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-content {
+    padding: 100px 16px 48px;
+  }
+
+  .hero-tag {
+    font-size: 0.78rem;
+  }
+
+  .hero-title {
+    font-size: 1.85rem;
+  }
+
+  .hero-visual {
+    max-width: 100%;
+  }
+}
+
+/* ============================================
+   SECTION HEADINGS & GLOBAL
+   ============================================ */
+
+@media (max-width: 768px) {
+  .section {
+    padding: 60px 0;
+  }
+
+  .section-title {
+    font-size: clamp(1.6rem, 5vw, 2rem);
+  }
+
+  .section-desc {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 48px 0;
+  }
+
+  .section-title {
+    font-size: 1.55rem;
+  }
+}
+
+/* ============================================
+   ABOUT SECTION
+   ============================================ */
+
+@media (max-width: 768px) {
+  .about-grid {
+    gap: 32px;
+  }
+
+  .about-image {
+    max-width: 100%;
+  }
+
+  .about-image img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 16px;
+  }
+
+  .about-stats {
+    gap: 10px;
+  }
+
+  .stat-item {
+    padding: 16px 12px;
+  }
+
+  .stat-number {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .stat-number {
+    font-size: 1.6rem;
+  }
+
+  .stat-label {
+    font-size: 0.72rem;
+  }
+}
+
+/* ============================================
+   SERVICES CAROUSEL
+   ============================================ */
+
+@media (max-width: 768px) {
+  .services-carousel-wrapper {
+    /* Allow touch-scrolling */
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .svc-slide {
+    flex: 0 0 200px;
+    height: 280px;
+    border-radius: 14px;
+  }
+
+  .svc-slide-title {
+    font-size: 1rem;
+  }
+
+  .svc-slide-desc {
+    font-size: 0.78rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .svc-slide {
+    flex: 0 0 175px;
+    height: 250px;
+  }
+}
+
+/* ============================================
+   GALLERY SECTION
+   ============================================ */
+
+@media (max-width: 768px) {
+  .gallery-grid {
+    gap: 10px;
+  }
+
+  .gallery-item {
+    border-radius: 12px;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .gallery-item:nth-child(1) {
+    grid-column: span 1;
+  }
+
+  .gallery-item img {
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
+  }
+}
+
+/* ============================================
+   TESTIMONIALS
+   ============================================ */
+
+@media (max-width: 768px) {
+  .testimonial-card {
+    min-width: 280px;
+    max-width: 320px;
+    padding: 24px 20px;
+  }
+
+  .testimonial-text {
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+
+  .testimonial-controls {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .testimonial-card {
+    min-width: 260px;
+    padding: 20px 16px;
+  }
+}
+
+/* ============================================
+   CONTACT SECTION
+   ============================================ */
+
+@media (max-width: 768px) {
+  .contact-grid {
+    gap: 32px;
+  }
+
+  .contact-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .contact-info-item {
+    background: var(--bg-secondary);
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  textarea {
+    min-height: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-info {
+    grid-template-columns: 1fr;
+  }
+
+  .btn-submit {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 48px 0 24px;
+  }
+
+  .footer-grid {
+    gap: 28px;
+  }
+
+  .footer-brand-desc {
+    font-size: 0.88rem;
+  }
+
+  .footer-col-title {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .footer-brand {
+    text-align: center;
+  }
+
+  .footer-social {
+    justify-content: center;
+  }
+}
+
+/* ============================================
+   PAGE 1 STEP BAR — BREADCRUMB STEPS
+   ============================================ */
+
+@media (max-width: 600px) {
+  .steps {
+    gap: 4px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+    justify-content: flex-start;
+  }
+
+  .step-label {
+    font-size: 0.65rem;
+    display: none;
+  }
+
+  .step-number {
+    width: 30px;
+    height: 30px;
+    font-size: 0.8rem;
+  }
+
+  .step-line {
+    flex: 0 0 20px;
+    width: 20px;
+  }
+}
+
+/* ============================================
+   PAGE 2: FUNCTION SELECTION
+   ============================================ */
+
+@media (max-width: 768px) {
+  .page-hero {
+    padding: 40px 0 30px;
+  }
+
+  .search-box {
+    padding: 12px 18px;
+  }
+
+  .search-input {
+    font-size: 0.9rem;
+  }
+
+  .function-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .function-card-img-wrapper {
+    height: 130px;
+  }
+
+  .function-card-body {
+    padding: 14px 12px;
+  }
+
+  .function-card-name {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .function-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .function-card-img-wrapper {
+    height: 110px;
+  }
+
+  .function-card-name {
+    font-size: 0.82rem;
+  }
+
+  .function-card-desc {
+    display: none;
+  }
+}
+
+@media (max-width: 360px) {
+  .function-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================
+   PAGE 3: EVENT DETAILS
+   ============================================ */
+
+@media (max-width: 768px) {
+  .details-hero {
+    padding: 60px 0 50px;
+  }
+
+  .detail-card {
+    padding: 20px 16px;
+  }
+
+  .detail-card:hover {
+    transform: none; /* disable slide on mobile - can be janky */
+  }
+
+  .details-form {
+    gap: 16px;
+  }
+
+  .selected-function-card {
+    padding: 12px 14px;
+    gap: 12px;
+  }
+
+  .food-pref-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .guest-presets {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .guest-preset-btn {
+    padding: 8px 14px;
+    font-size: 0.82rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .details-hero {
+    padding: 50px 0 40px;
+  }
+
+  .food-pref-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .counter-display input {
+    font-size: 1.6rem;
+    width: 90px;
+  }
+
+  .details-submit {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .details-submit .btn-secondary,
+  .details-submit .btn-primary {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ============================================
+   PAGE 4: MENU BUILDER
+   ============================================ */
+
+@media (max-width: 768px) {
+  .menu-hero {
+    padding: 40px 0 16px;
+  }
+
+  .event-summary-bar {
+    gap: 8px;
+    padding: 10px 14px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    border-radius: 16px;
+  }
+
+  .summary-chip {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+  }
+
+  .menu-mode-toggle {
+    max-width: 100%;
+  }
+
+  .mode-btn {
+    font-size: 0.85rem;
+    padding: 11px 16px;
+  }
+
+  /* Packages: single column */
+  .packages-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* Custom items: 2 columns */
+  .custom-items-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .custom-item-img-wrapper {
+    height: 130px;
+  }
+
+  /* Cart: full width, stick to bottom */
+  .floating-cart {
+    width: calc(100vw - 20px);
+    left: 10px;
+    right: 10px;
+    transform: none;
+    bottom: 16px;
+    border-radius: 16px;
+  }
+
+  .cart-summary-bar {
+    padding: 14px 16px;
+  }
+
+  .cart-total {
+    font-size: 1rem;
+  }
+
+  /* Category tabs - horizontal scroll */
+  .category-tabs {
+    gap: 6px;
+  }
+
+  .category-tab {
+    padding: 8px 16px;
+    font-size: 0.82rem;
+  }
+
+  /* Add item modal */
+  .add-item-modal-content {
+    width: 95%;
+    max-height: 85vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .custom-items-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .custom-item-img-wrapper {
+    height: 160px;
+  }
+
+  .mode-btn svg {
+    display: none;
+  }
+
+  .mode-btn {
+    font-size: 0.8rem;
+    padding: 10px 12px;
+  }
+
+  /* Package cards */
+  .package-header {
+    padding: 20px 18px 16px;
+  }
+
+  .package-name {
+    font-size: 1.2rem;
+  }
+
+  .price-amount {
+    font-size: 1.7rem;
+  }
+
+  .package-items-list {
+    padding: 16px 18px;
+  }
+
+  .package-footer {
+    padding: 12px 18px 20px;
+  }
+}
+
+/* ============================================
+   PAGE 5: PAYMENT / ORDER
+   ============================================ */
+
+@media (max-width: 1024px) {
+  .pay-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .pay-pricing-card {
+    /* On tablet/mobile, show pricing sticky at top of right column */
+    order: -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .pay-hero {
+    padding: 40px 0 16px;
+  }
+
+  .pay-card-header {
+    padding: 16px 18px;
+  }
+
+  .pay-card-body {
+    padding: 16px 18px;
+  }
+
+  .pay-info-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .pay-type-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .pay-method-grid {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .pay-method-option {
+    flex: 1 1 calc(50% - 5px);
+    min-width: 120px;
+  }
+
+  .demo-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .demo-approve-btn,
+  .demo-reject-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .pay-card-header {
+    padding: 14px 16px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .pay-card-body {
+    padding: 14px 16px;
+  }
+
+  .pay-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pay-type-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pay-method-grid {
+    flex-direction: column;
+  }
+
+  .pay-method-option {
+    flex: 1 1 100%;
+  }
+
+  .pay-method-card {
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .pay-now-btn {
+    font-size: 0.9rem;
+    padding: 14px;
+  }
+
+  .rejected-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .rejected-actions .btn-primary,
+  .rejected-actions .btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .success-details {
+    max-width: 100%;
+  }
+
+  .pay-price-row.grand {
+    font-size: 0.95rem;
+  }
+
+  .pay-price-row.grand span:last-child {
+    font-size: 1.05rem;
+  }
+}
+
+/* ============================================
+   LOGIN / AUTH PAGE
+   ============================================ */
+
+@media (max-width: 900px) {
+  .auth-wrapper {
+    flex-direction: column;
+    min-height: auto;
+    max-width: 480px;
+    margin: auto;
+    border-radius: 16px;
+  }
+
+  .auth-brand-panel {
+    display: none; /* Hide decorative brand panel on mobile/tablet */
+  }
+
+  .auth-form-panel {
+    padding: 40px 28px;
+  }
+
+  .auth-form-title {
+    font-size: 1.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-body {
+    padding: 16px;
+    align-items: flex-start;
+    padding-top: 40px;
+  }
+
+  .auth-wrapper {
+    max-width: 100%;
+    border-radius: 16px;
+  }
+
+  .auth-form-panel {
+    padding: 32px 20px;
+  }
+
+  .auth-form-title {
+    font-size: 1.5rem;
+  }
+
+  .auth-tab {
+    font-size: 0.9rem;
+    padding: 14px 0;
+  }
+
+  .auth-input-wrap input {
+    font-size: 0.88rem;
+    padding: 12px 14px 12px 40px;
+  }
+
+  .auth-submit {
+    padding: 14px;
+    font-size: 0.92rem;
+  }
+}
+
+/* ============================================
+   ADMIN PAGE
+   ============================================ */
+
+@media (max-width: 1024px) {
+  .admin-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-sidebar {
+    width: 100%;
+    position: static;
+    height: auto;
+    flex-direction: row;
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .admin-table {
+    min-width: 600px;
+  }
+
+  .admin-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================
+   DETAILS PAGE (details.html)
+   ============================================ */
+
+@media (max-width: 768px) {
+  .details-hero-wave svg {
+    height: 50px;
+  }
+}
+
+/* ============================================
+   TOAST NOTIFICATION
+   ============================================ */
+
+@media (max-width: 480px) {
+  .toast {
+    width: calc(100vw - 32px);
+    text-align: center;
+    font-size: 0.85rem;
+    padding: 12px 20px;
+  }
+
+  .toast.show {
+    bottom: 20px;
+  }
+}
+
+/* ============================================
+   BUTTONS — TOUCH-FRIENDLY SIZING
+   ============================================ */
+
+@media (max-width: 768px) {
+  /* Minimum 44px tap target per accessibility guidelines */
+  .btn-primary,
+  .btn-secondary,
+  .btn-submit,
+  .mode-btn,
+  .category-tab,
+  .nav-link {
+    min-height: 44px;
+  }
+
+  .qty-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .cart-item-remove,
+  .add-modal-close {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* ============================================
+   LIGHTBOX
+   ============================================ */
+
+@media (max-width: 768px) {
+  .lightbox img {
+    max-width: 95vw;
+    max-height: 80vh;
+    object-fit: contain;
+  }
+
+  .lightbox-close {
+    top: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* ============================================
+   RESPONSIVE TYPOGRAPHY SCALE
+   ============================================ */
+
+@media (max-width: 768px) {
+  h1 { font-size: clamp(1.8rem, 6vw, 2.6rem); }
+  h2 { font-size: clamp(1.5rem, 4.5vw, 2rem); }
+  h3 { font-size: clamp(1.1rem, 3.5vw, 1.4rem); }
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: clamp(1.6rem, 7vw, 2.2rem); }
+  h2 { font-size: clamp(1.35rem, 5.5vw, 1.7rem); }
+}
+
+/* ============================================
+   UTILITY: HIDE/SHOW PER BREAKPOINT
+   ============================================ */
+
+.hide-mobile  { display: block; }
+.show-mobile  { display: none; }
+
+@media (max-width: 768px) {
+  .hide-mobile  { display: none !important; }
+  .show-mobile  { display: block !important; }
+  .show-mobile-flex { display: flex !important; }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+  .navbar,
+  .nav-toggle,
+  .floating-cart,
+  .toast,
+  .hero-scroll-indicator,
+  .testimonial-controls {
+    display: none !important;
+  }
+}

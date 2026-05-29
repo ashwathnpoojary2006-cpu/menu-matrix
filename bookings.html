@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Bookings — MenuMatrix</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=20260523">
+  <link rel="stylesheet" href="css/responsive.css?v=20260523">
+  <style>
+    .bookings-hero { padding: 120px 0 60px; background: var(--dark-2); position: relative; overflow: hidden; }
+    .bookings-hero::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse at 60% 40%, rgba(124,58,237,.18) 0%, transparent 65%); }
+    .bookings-hero .container { position:relative; }
+
+    .bookings-section { padding: 60px 0 100px; }
+
+    /* Loading */
+    .bookings-loading { display:flex; flex-direction:column; align-items:center; gap:16px; padding:80px 20px; color:var(--text-muted); }
+    .loading-spinner { width:44px; height:44px; border:3px solid rgba(124,58,237,.2); border-top-color:var(--purple); border-radius:50%; animation:spin .8s linear infinite; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+
+    /* Empty state */
+    .bookings-empty { display:flex; flex-direction:column; align-items:center; gap:20px; padding:80px 20px; text-align:center; }
+    .bookings-empty-icon { width:72px; height:72px; background:rgba(124,58,237,.12); border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--purple); }
+    .bookings-empty h3 { font-size:1.4rem; font-weight:600; color:var(--text-primary); margin:0; }
+    .bookings-empty p { color:var(--text-muted); max-width:360px; margin:0; line-height:1.6; }
+
+    /* Booking cards grid */
+    .bookings-grid { display:grid; gap:24px; }
+
+    .booking-card { background:var(--dark-2); border:1px solid rgba(255,255,255,.07); border-radius:20px; overflow:hidden; transition:border-color .2s, transform .2s; }
+    .booking-card:hover { border-color:rgba(124,58,237,.4); transform:translateY(-2px); }
+
+    .booking-card-header { display:flex; align-items:center; justify-content:space-between; padding:20px 24px; border-bottom:1px solid rgba(255,255,255,.07); gap:12px; flex-wrap:wrap; }
+    .booking-card-left { display:flex; align-items:center; gap:14px; }
+    .booking-card-icon { width:44px; height:44px; background:rgba(124,58,237,.15); border-radius:12px; display:flex; align-items:center; justify-content:center; color:var(--purple); flex-shrink:0; }
+    .booking-event-type { font-weight:700; font-size:1.05rem; color:var(--text-primary); }
+    .booking-order-id { font-size:.8rem; color:var(--text-muted); margin-top:2px; }
+
+    .booking-status-badge { display:inline-flex; align-items:center; gap:6px; padding:5px 12px; border-radius:20px; font-size:.78rem; font-weight:600; letter-spacing:.03em; text-transform:uppercase; }
+    .badge-confirmed { background:rgba(16,185,129,.15); color:#10b981; border:1px solid rgba(16,185,129,.25); }
+    .badge-pending   { background:rgba(245,158,11,.12); color:#f59e0b; border:1px solid rgba(245,158,11,.25); }
+    .badge-approved  { background:rgba(59,130,246,.12); color:#60a5fa; border:1px solid rgba(59,130,246,.25); }
+    .badge-rejected  { background:rgba(239,68,68,.12);  color:#ef4444; border:1px solid rgba(239,68,68,.25); }
+    .badge-dot { width:6px; height:6px; border-radius:50%; background:currentColor; }
+
+    .booking-card-body { display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:0; }
+    .booking-detail { padding:16px 24px; border-right:1px solid rgba(255,255,255,.06); border-bottom:1px solid rgba(255,255,255,.06); }
+    .booking-detail:last-child { border-right:none; }
+    .booking-detail-label { font-size:.72rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:.06em; margin-bottom:5px; }
+    .booking-detail-value { font-size:.95rem; font-weight:600; color:var(--text-primary); }
+
+    .booking-card-footer { display:flex; align-items:center; justify-content:space-between; padding:16px 24px; gap:12px; flex-wrap:wrap; }
+    .booking-amount { display:flex; align-items:baseline; gap:6px; }
+    .booking-amount-label { font-size:.82rem; color:var(--text-muted); }
+    .booking-amount-value { font-size:1.2rem; font-weight:700; color:var(--yellow); }
+    .booking-balance { font-size:.78rem; color:var(--text-muted); margin-top:2px; }
+    .booking-actions { display:flex; gap:10px; }
+    .booking-actions .btn-secondary { padding:8px 18px; font-size:.82rem; }
+    .booking-actions .btn-primary   { padding:8px 18px; font-size:.82rem; }
+
+    /* Menu items preview */
+    .booking-menu-preview { padding:14px 24px; border-top:1px solid rgba(255,255,255,.06); display:flex; flex-wrap:wrap; gap:6px; }
+    .menu-tag { background:rgba(124,58,237,.1); border:1px solid rgba(124,58,237,.2); color:var(--purple-light, #a78bfa); padding:3px 10px; border-radius:20px; font-size:.75rem; font-weight:500; }
+
+    /* Summary strip */
+    .bookings-summary { display:grid; grid-template-columns:repeat(auto-fit, minmax(140px,1fr)); gap:16px; margin-bottom:36px; }
+    .summary-stat { background:var(--dark-2); border:1px solid rgba(255,255,255,.07); border-radius:16px; padding:20px; text-align:center; }
+    .summary-stat-value { font-size:1.8rem; font-weight:800; color:var(--purple); }
+    .summary-stat-label { font-size:.8rem; color:var(--text-muted); margin-top:4px; }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <img class="logo-img" src="assets/logo.png" alt="MenuMatrix">
+        <span class="logo-text">Menu<span class="logo-accent">Matrix</span></span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#about" class="nav-link">About</a>
+        <a href="index.html#services" class="nav-link">Services</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
+      </div>
+      <a href="function.html" class="nav-cta">Book Now
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <button class="nav-toggle" id="navToggle" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="bookings-hero">
+    <div class="container">
+      <p class="section-tag" style="color:var(--yellow);">Your Account</p>
+      <h1 class="section-title" style="margin-bottom:12px;">My <span class="gradient-text">Bookings</span></h1>
+      <p class="section-desc" style="max-width:500px;">Track all your catering orders and their current status.</p>
+    </div>
+  </section>
+
+  <!-- BOOKINGS -->
+  <section class="bookings-section">
+    <div class="container">
+
+      <!-- Loading state -->
+      <div class="bookings-loading" id="loadingState">
+        <div class="loading-spinner"></div>
+        <p>Loading your bookings…</p>
+      </div>
+
+      <!-- Empty state -->
+      <div class="bookings-empty" id="emptyState" style="display:none;">
+        <div class="bookings-empty-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg>
+        </div>
+        <h3>No bookings yet</h3>
+        <p>You haven't placed any catering orders yet. Start by booking an event!</p>
+        <a href="function.html" class="btn-primary" style="margin-top:8px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span>Book an Event</span>
+        </a>
+      </div>
+
+      <!-- Bookings list -->
+      <div id="bookingsContent" style="display:none;">
+        <div class="bookings-summary" id="bookingsSummary"></div>
+        <div class="bookings-grid" id="bookingsGrid"></div>
+
+        <div style="text-align:center; margin-top:48px;">
+          <a href="function.html" class="btn-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span>Book Another Event</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border:none;padding-top:0;">
+        <p class="footer-copy">&copy; 2026 MenuMatrix. All rights reserved.</p>
+        <div class="footer-bottom-links"><a href="index.html">Home</a><a href="index.html#contact">Contact</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast"><span id="toastMsg">Done!</span></div>
+
+  <script src="js/common.js?v=20260523"></script>
+  <script src="js/auth.js?v=20260523"></script>
+  <script>
+    if (typeof requireAuth === 'function') requireAuth('bookings.html');
+  </script>
+
+  <script>
+    const API = 'http://127.0.0.1:5000/api';
+
+    const STATUS_CONFIG = {
+      pending:   { label: 'Pending Review', cls: 'badge-pending' },
+      approved:  { label: 'Approved',       cls: 'badge-approved' },
+      confirmed: { label: 'Confirmed',      cls: 'badge-confirmed' },
+      rejected:  { label: 'Not Available',  cls: 'badge-rejected' },
+    };
+
+    const PREF_MAP = { veg: 'Pure Veg', nonveg: 'Non-Veg', both: 'Veg + Non-Veg' };
+
+    function fmt(n) { return (n || 0).toLocaleString('en-IN'); }
+
+    function formatDate(str) {
+      if (!str) return '—';
+      const d = new Date(str);
+      return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+    }
+
+    function renderSummary(orders) {
+      const total     = orders.length;
+      const confirmed = orders.filter(o => o.status === 'confirmed').length;
+      const pending   = orders.filter(o => o.status === 'pending' || o.status === 'approved').length;
+      const totalSpent = orders.filter(o => o.status === 'confirmed').reduce((s, o) => s + (o.grand_total || 0), 0);
+
+      document.getElementById('bookingsSummary').innerHTML = `
+        <div class="summary-stat"><div class="summary-stat-value">${total}</div><div class="summary-stat-label">Total Bookings</div></div>
+        <div class="summary-stat"><div class="summary-stat-value">${confirmed}</div><div class="summary-stat-label">Confirmed</div></div>
+        <div class="summary-stat"><div class="summary-stat-value">${pending}</div><div class="summary-stat-label">In Progress</div></div>
+        <div class="summary-stat"><div class="summary-stat-value">₹${fmt(totalSpent)}</div><div class="summary-stat-label">Total Spent</div></div>
+      `;
+    }
+
+    function menuTags(items) {
+      if (!items || !items.length) return '';
+      const top = items.slice(0, 6);
+      const more = items.length > 6 ? `<span class="menu-tag">+${items.length - 6} more</span>` : '';
+      return `<div class="booking-menu-preview">
+        ${top.map(i => `<span class="menu-tag">${i.name}</span>`).join('')}
+        ${more}
+      </div>`;
+    }
+
+    function renderCard(o) {
+      const sc = STATUS_CONFIG[o.status] || { label: o.status, cls: 'badge-pending' };
+      const grand = o.grand_total || 0;
+      const paid  = o.amount_paid || 0;
+      const balance = grand - paid;
+
+      const continuePayBtn = (o.status === 'approved')
+        ? `<a href="payment.html" class="btn-primary" onclick="resumeOrder(${o.id}, '${o.order_id}')">Complete Payment</a>`
+        : '';
+
+      return `
+        <div class="booking-card reveal">
+          <div class="booking-card-header">
+            <div class="booking-card-left">
+              <div class="booking-card-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              </div>
+              <div>
+                <div class="booking-event-type">${o.event_type || '—'}</div>
+                <div class="booking-order-id">${o.order_id}</div>
+              </div>
+            </div>
+            <span class="booking-status-badge ${sc.cls}">
+              <span class="badge-dot"></span>${sc.label}
+            </span>
+          </div>
+
+          <div class="booking-card-body">
+            <div class="booking-detail">
+              <div class="booking-detail-label">Event Date</div>
+              <div class="booking-detail-value">${formatDate(o.event_date)}</div>
+            </div>
+            <div class="booking-detail">
+              <div class="booking-detail-label">Guests</div>
+              <div class="booking-detail-value">${fmt(o.guest_count)}</div>
+            </div>
+            <div class="booking-detail">
+              <div class="booking-detail-label">Venue</div>
+              <div class="booking-detail-value">${o.venue_name || '—'}</div>
+            </div>
+            <div class="booking-detail">
+              <div class="booking-detail-label">Food Preference</div>
+              <div class="booking-detail-value">${PREF_MAP[o.food_preference] || o.food_preference || '—'}</div>
+            </div>
+            <div class="booking-detail">
+              <div class="booking-detail-label">Booked On</div>
+              <div class="booking-detail-value">${formatDate(o.created_at)}</div>
+            </div>
+          </div>
+
+          ${menuTags(o.menu_items)}
+          ${(function(msgs) {
+            if (!msgs || !msgs.length) return '';
+            return `
+              <div class="booking-messages-preview" style="padding:14px 24px; border-top:1px solid rgba(255,255,255,.06); background:rgba(124,58,237,.03);">
+                <div style="font-size:.72rem; font-weight:700; color:var(--purple); text-transform:uppercase; letter-spacing:.05em; margin-bottom:8px; display:flex; align-items:center; gap:6px;">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                  Messages from MenuMatrix
+                </div>
+                <div style="display:flex; flex-direction:column; gap:8px;">
+                  ${msgs.map(m => {
+                    const d = new Date(m.sent_at);
+                    const timeStr = d.toLocaleDateString('en-IN', {day:'numeric', month:'short'}) + ' ' + d.toLocaleTimeString('en-IN', {hour:'2-digit', minute:'2-digit', hour12:true});
+                    return `
+                    <div style="background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.05); padding:10px 12px; border-radius:10px; font-size:.82rem; color:var(--text-primary); line-height:1.4;">
+                      <div style="font-weight:600; color:#a78bfa; font-size:.75rem; margin-bottom:3px;">Caterer:</div>
+                      <div style="white-space:pre-wrap;">${m.message}</div>
+                      <div style="text-align:right; font-size:.65rem; color:var(--text-muted); margin-top:4px;">${timeStr}</div>
+                    </div>
+                    `;
+                  }).join('')}
+                </div>
+              </div>
+            `;
+          })(o.messages)}
+
+          <div class="booking-card-footer">
+            <div>
+              <div class="booking-amount">
+                <span class="booking-amount-label">Total</span>
+                <span class="booking-amount-value">₹${fmt(grand)}</span>
+              </div>
+              ${paid > 0 && balance > 0
+                ? `<div class="booking-balance">Paid ₹${fmt(paid)} · Balance ₹${fmt(balance)} on event day</div>`
+                : paid > 0
+                ? `<div class="booking-balance" style="color:#10b981;">Fully paid</div>`
+                : ''}
+            </div>
+            <div class="booking-actions">
+              ${o.status === 'confirmed' && o.id
+                ? `<a href="${API}/orders/${o.id}/invoice" class="btn-secondary" target="_blank">Invoice</a>`
+                : ''}
+              ${continuePayBtn}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function resumeOrder(id, code) {
+      // Clear temporary draft keys from other booking flows so payment page loads fresh order info
+      ['menumatrix_function', 'menumatrix_details', 'menumatrix_menu'].forEach(k => localStorage.removeItem(k));
+      localStorage.setItem('mm_order_id', id);
+      localStorage.setItem('mm_order_code', code);
+    }
+
+    async function loadBookings() {
+      try {
+        const token = typeof getToken === 'function' ? getToken() : localStorage.getItem('menumatrix_token');
+        const res = await fetch(`${API}/my-orders`, {
+          headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' }
+        });
+
+        document.getElementById('loadingState').style.display = 'none';
+
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const orders = await res.json();
+
+        if (!orders.length) {
+          document.getElementById('emptyState').style.display = 'flex';
+          return;
+        }
+
+        document.getElementById('bookingsContent').style.display = '';
+        renderSummary(orders);
+        document.getElementById('bookingsGrid').innerHTML = orders.map(renderCard).join('');
+
+        // Trigger reveal animations
+        setTimeout(() => {
+          document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+        }, 50);
+
+      } catch (err) {
+        document.getElementById('loadingState').style.display = 'none';
+        document.getElementById('emptyState').style.display = 'flex';
+        document.querySelector('.bookings-empty h3').textContent = 'Could not load bookings';
+        document.querySelector('.bookings-empty p').textContent = 'Make sure the server is running and try again.';
+        console.error('Bookings load error:', err);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // requireAuth will redirect if not logged in, so we can safely load
+      setTimeout(loadBookings, 100);
+    });
+  </script>
+</body>
+</html>

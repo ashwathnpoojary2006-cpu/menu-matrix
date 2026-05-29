@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MenuMatrix — Choose your event type. We cater weddings, engagements, birthdays, corporate events, festivals, house parties, housewarmings, baby showers, anniversaries, and religious functions.">
+  <title>Choose Your Function — MenuMatrix</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=20260523">
+  <link rel="stylesheet" href="css/responsive.css?v=20260523">
+</head>
+<body>
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <img class="logo-img" src="assets/logo.png" alt="MenuMatrix">
+        <span class="logo-text">Menu<span class="logo-accent">Matrix</span></span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#about" class="nav-link">About</a>
+        <a href="index.html#services" class="nav-link">Services</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
+      </div>
+      <a href="function.html" class="nav-cta active-cta">Book Now
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <button class="nav-toggle" id="navToggle" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===== STEP INDICATOR ===== -->
+  <div class="step-bar">
+    <div class="container">
+      <div class="steps">
+        <div class="step active">
+          <div class="step-number">1</div>
+          <div class="step-label">Choose Function</div>
+        </div>
+        <div class="step-line"></div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-label">Event Details</div>
+        </div>
+        <div class="step-line"></div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-label">Select Menu</div>
+        </div>
+        <div class="step-line"></div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <div class="step-label">Payment</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PAGE HEADER ===== -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-content reveal">
+        <p class="section-tag">Step 1 of 4</p>
+        <h1 class="section-title">Choose Your Function</h1>
+        <p class="section-desc">What occasion are you planning? Select an event type to get started with a menu tailored just for it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SEARCH BAR ===== -->
+  <section class="search-section">
+    <div class="container">
+      <div class="search-wrapper reveal">
+        <div class="search-box">
+          <svg class="search-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input type="text" id="functionSearch" class="search-input" placeholder="Search functions... (e.g. Wedding, Birthday, Pooja)" autocomplete="off">
+          <button class="search-clear" id="searchClear" onclick="clearSearch()" style="display:none;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <div class="search-result-count" id="resultCount"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FUNCTION CARDS ===== -->
+  <section class="section function-cards-section">
+    <div class="container">
+      <div class="function-grid" id="functionGrid">
+        <!-- Populated by JS -->
+      </div>
+      <div class="no-results" id="noResults" style="display:none;">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <h3>No functions found</h3>
+        <p>Try searching for something else, like "Wedding" or "Birthday"</p>
+      </div>
+      <div class="details-submit" style="justify-content: flex-start; padding-top: 20px;">
+        <a href="index.html" class="btn-secondary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Back to Home
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border:none; padding-top:0;">
+        <p class="footer-copy">&copy; 2026 MenuMatrix. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="index.html">Home</a>
+          <a href="index.html#contact">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== TOAST ===== -->
+  <div class="toast" id="toast">
+    <span id="toastMsg">Function selected!</span>
+  </div>
+
+  <script src="js/common.js?v=20260523"></script>
+  <script src="js/auth.js?v=20260523"></script>
+  <script src="js/function.js?v=20260523"></script>
+  <script>
+    // Block guest from booking - redirect to login when they try to select a function
+    document.addEventListener('DOMContentLoaded', () => {
+      if (!isLoggedIn()) {
+        document.getElementById('functionGrid').addEventListener('click', (e) => {
+          const card = e.target.closest('.function-card');
+          if (card) {
+            e.preventDefault();
+            e.stopPropagation();
+            alert('Please sign in to book an event. You will be redirected to the login page.');
+            window.location.href = 'login.html?redirect=function.html';
+          }
+        }, true);
+      }
+    });
+  </script>
+</body>
+</html>
